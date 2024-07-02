@@ -25,15 +25,15 @@ RUN set -xe; \
         zip unzip \
         curl \
         libzip-dev libcurl4-gnutls-dev libpng-dev libxml2-dev libjpeg-dev libfreetype6-dev \
-        libmagickwand-dev; \
+        libmagickwand-dev libwebp-dev; \
     curl -fsSL https://deb.nodesource.com/setup_20.x | bash -; \
     apt-get install -y nodejs; \
-    docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/; \
+    docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ --with-webp=/usr/include/; \
     docker-php-ext-install pdo_mysql mysqli gd zip intl soap mbstring exif bcmath curl sockets; \
     pecl install imagick; \
     docker-php-ext-enable imagick; \
     docker-php-ext-enable mysqli;
 
-# RUN set -xe; \
-#     pecl install xdebug; \
-#     docker-php-ext-enable xdebug
+RUN set -xe; \
+    pecl install xdebug; \
+    docker-php-ext-enable xdebug
